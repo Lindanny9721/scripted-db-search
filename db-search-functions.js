@@ -10,24 +10,48 @@ function getVersion(handleVersion) {
     // the database snapshot and passes it as an argument to the 'handleVersion'
     // callback.
     
-    //var version = snapshot.val();
-    //handleVersion(version);
+    var version = snapshot.val();
+    handleVersion(version);
   });
 }
 
 function getHelloWorldValue(handleType) {
+    var database = firebase.database();
+  var databaseVersionReference = database.ref('/db-search/hello-world');
+  databaseVersionReference.once('value').then(function(snapshot) {
+    var version = snapshot.val();
+    handleType(version);
+  });
   // TODO: Your code goes here. Hint: use 'getVersion' as a template.
 }
 
 function applyDiscount(handleNewPrice) {
+  var database = firebase.database();
+  var databaseVersionReference = database.ref('/db-search/discount');
+  databaseVersionReference.once('value').then(function(snapshot) {
+    var version = snapshot.val()*100;
+    handleNewPrice(version);
+  });
   // TODO: Your code goes here.
 }
 
 function getArrayLength(handleLength) {
+  var database = firebase.database();
+  var databaseVersionReference = database.ref('/db-search/array');
+  databaseVersionReference.once('value').then(function(snapshot) {
+    var version = snapshot.val().length;
+    handleLength(version);
+  });
   // TODO: Your code goes here.
 }
 
 function getLastArrayElement(handleElement) {
+  var database = firebase.database();
+  var databaseVersionReference = database.ref('/db-search/array');
+  databaseVersionReference.once('value').then(function(snapshot) {
+    var version = snapshot.val().slice(0, version.length);
+    handleElement(version);
+  });
   // TODO: Your code goes here.
 }
 
